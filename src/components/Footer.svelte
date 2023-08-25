@@ -1,6 +1,11 @@
 <footer>
-  <div class="container" style="--container-width: 78rem">
-    <img class="logo" src="./assets/logo.svg" alt="" />
+  <div
+    class="container"
+    style="--container-width: 78rem;--container-padding: 3rem"
+  >
+    <a href="/" class="logo"
+      ><img src="./assets/logo.svg" alt="Fylo Home Page" /></a
+    >
     <div class="footer-grid" style="margin-inline: auto;">
       <div class="footer-col even-columns">
         <img src="./assets/icons/icon-location.svg" alt="" />
@@ -15,23 +20,31 @@
         <img src="./assets/icons/icon-email.svg" alt="" />
         <a href="mailto:samirahmad5445@gmail.com">example@fylo.com</a>
       </div>
-      <div class="footer-col footer-subgrid" style="--grid-col: 4rem;">
-        <div class="footer-col">
-          <a href="#">About Us</a>
-          <a href="#">Jobs</a>
-          <a href="#">Press</a>
-          <a href="#">Blog</a>
-        </div>
-        <div class="footer-col">
-          <a href="#">Contact Us</a>
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-        </div>
-      </div>
+      <nav class="footer-col footer-nav">
+        <ul class="stack">
+          <li><a href="#About">About Us</a></li>
+          <li><a href="#Jobs">Jobs</a></li>
+          <li><a href="#Press">Press</a></li>
+          <li><a href="#Blog">Blog</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col footer-nav">
+        <ul class="stack">
+          <li><a href="#Contact">Contact Us</a></li>
+          <li><a href="#Terms">Terms</a></li>
+          <li><a href="#Privacy">Privacy</a></li>
+        </ul>
+      </nav>
       <div class="footer-col media-icons">
-        <a href="#"><img src="./assets/icons/icon-facebook.svg" alt="" /></a>
-        <a href="#"><img src="./assets/icons/icon-twitter.svg" alt="" /></a>
-        <a href="#"><img src="./assets/icons/icon-instagram.svg" alt="" /></a>
+        <a href="#facebook"
+          ><img src="./assets/icons/icon-facebook.svg" alt="" /></a
+        >
+        <a href="#twitter"
+          ><img src="./assets/icons/icon-twitter.svg" alt="" /></a
+        >
+        <a href="#instagram"
+          ><img src="./assets/icons/icon-instagram.svg" alt="" /></a
+        >
       </div>
     </div>
   </div>
@@ -39,40 +52,18 @@
 
 <style>
   footer {
+    --footer-spacer: 3rem;
     background-color: var(--bg-footer);
     padding-block-end: 3rem;
   }
   .logo {
-    margin-block-end: 1.5rem;
-  }
-  .footer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .footer-grid > * {
-    flex-basis: 360px;
-  }
-  .footer-subgrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .footer-grid a {
     display: block;
-  }
-  .even-columns {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem 1rem;
-    align-content: start;
+    margin-block-end: var(--footer-spacer);
   }
   .media-icons {
-    max-width: 8rem;
     display: flex;
-    gap: 0.75rem;
+    justify-content: center;
+    gap: calc(var(--footer-spacer) / 4);
   }
   .media-icons a {
     width: 2rem;
@@ -85,12 +76,32 @@
     object-fit: contain;
     margin: 0.375rem;
   }
-  @media (max-width: 48rem) {
-    .footer-subgrid {
-      grid-template-columns: 1fr;
+  /* footer layout */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-between;
+    gap: var(--footer-spacer);
+  }
+  .even-columns {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    place-content: start;
+    gap: 0.5rem 1.5rem;
+  }
+  .stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  @media (min-width: 50rem) {
+    .footer-grid {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 2rem;
     }
-    .media-icons {
-      margin-inline: auto;
+    .footer-col:first-child {
+      grid-column: span 2;
     }
   }
 </style>

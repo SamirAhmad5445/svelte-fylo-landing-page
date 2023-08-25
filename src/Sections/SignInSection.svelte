@@ -1,18 +1,15 @@
 <script>
   import Button from "../components/Button.svelte";
-  const handleFormInput = () => {
+
+  $: error = "";
+  const validate = () => {
     const input = document.getElementById("si-input").value;
-    if (
-      input &&
-      input.indexOf("@") !== -1 &&
-      input.indexOf(".") !== -1 &&
-      input.split("@").length === 2 &&
-      input.lastIndexOf(".") > input.indexOf("@")
-    ) {
-      console.log("ok");
-    } else {
-      console.log("err");
-    }
+    let emailFormat = new RegExp(
+      "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-z]{2,3}"
+    );
+    emailFormat.test(input)
+      ? (error = "")
+      : (error = "Please enter a valid Email address.");
   };
 </script>
 
@@ -24,8 +21,18 @@
       generous. If you have any questions, our support team would be happy to
       help you.
     </p>
-    <form on:submit|preventDefault={handleFormInput} class="si-form">
-      <input id="si-input" type="text" placeholder="e.g. example@example.com" />
+    <form
+      on:submit|preventDefault={validate}
+      class="si-form"
+      data-error={error}
+    >
+      <input
+        id="si-input"
+        type="text"
+        name="email"
+        placeholder="e.g. example@example.com"
+        on:keyup={validate}
+      />
       <Button>Get Started For Free</Button>
     </form>
   </div>
@@ -33,7 +40,7 @@
 
 <style>
   .si-section {
-    padding-block: 4rem;
+    padding: 4rem 2rem;
     background-image: linear-gradient(
       to bottom,
       var(--bg-body) 60%,
@@ -51,6 +58,7 @@
   .si-form {
     display: flex;
     gap: 1.25rem;
+    position: relative;
   }
   @media (max-width: 48rem) {
     .si-form {
@@ -65,5 +73,20 @@
     background-color: var(--white-1);
     color: var(--dark-blue-4);
     caret-color: var(--cyan);
+  }
+  .si-form::after {
+    --err-msg-spacer: 1.75rem;
+    --top: calc(100% + var(--err-msg-spacer) / 4);
+    --left: var(--err-msg-spacer);
+    content: attr(data-error);
+    position: absolute;
+    inset: var(--top) auto auto var(--left);
+    color: var(--error);
+  }
+  @media (max-width: 48rem) {
+    .si-form::after {
+      inset: var(--top) 0 auto;
+      text-align: center;
+    }
   }
 </style>

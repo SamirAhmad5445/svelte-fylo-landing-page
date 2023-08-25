@@ -15,7 +15,7 @@
   --bg-footer: var(--dark-blue-4);
   --bg-testimonial: var(--dark-blue-1);
   /* accents */
-  --cta-gradient: var(--cyan), var(--blue);
+  --cta-gradient: var(--cyan) 60%, var(--blue);
   --error: var(--red);
   /* typography */
   --ff-heading: "Raleway", sans-serif;
@@ -72,6 +72,10 @@ a {
   border-radius: 0.125rem;
 }
 
+a:hover {
+  color: var(--cyan);
+}
+
 a:focus-visible {
   outline: 0.125rem solid var(--cyan);
   outline-offset: 0.375rem;
@@ -84,6 +88,7 @@ button {
 li {
   display: inline-block;
 }
+
 .sr-only {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
